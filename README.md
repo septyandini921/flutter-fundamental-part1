@@ -1,6 +1,7 @@
 # hello_world
 
 A new Flutter project.
+Nimas Septiandini
 
 ## Getting Started
 
