@@ -32,12 +32,30 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  // <--- PERUBAHAN: Variabel/State untuk mengambil tanggal
+  DateTime selectedDate = DateTime.now();
+  // ---> AKHIR PERUBAHAN
 
   void _incrementCounter() {
     setState(() {
       _counter++;
     });
   }
+
+  // <--- PERUBAHAN: Method untuk menampilkan Date Picker
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(2015, 8),
+        lastDate: DateTime(2101));
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
+  }
+  // ---> AKHIR PERUBAHAN
 
   @override
   Widget build(BuildContext context) {
@@ -71,8 +89,6 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               const SizedBox(height: 8),
               const CupertinoActivityIndicator(),
-
-              // <--- PERUBAHAN: TextField dari Langkah 5 ditambahkan di sini
               const SizedBox(height: 24),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 32.0),
@@ -83,6 +99,18 @@ class _MyHomePageState extends State<MyHomePage> {
                     labelText: 'Nama',
                   ),
                 ),
+              ),
+
+              // <--- PERUBAHAN: Widget Date Picker dari Langkah 6
+              const SizedBox(height: 24),
+              const Text("Contoh Date Picker:"),
+              Text("${selectedDate.toLocal()}".split(' ')[0]),
+              const SizedBox(
+                height: 8.0,
+              ),
+              ElevatedButton(
+                onPressed: () => _selectDate(context),
+                child: const Text('Pilih Tanggal'),
               ),
               // ---> AKHIR PERUBAHAN
 
@@ -135,3 +163,4 @@ showAlertDialog(BuildContext context) {
     },
   );
 }
+
