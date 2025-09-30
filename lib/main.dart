@@ -47,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: SingleChildScrollView( // Ditambahkan agar bisa di-scroll jika konten terlalu panjang
+        child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(vertical: 20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -72,7 +72,20 @@ class _MyHomePageState extends State<MyHomePage> {
               const SizedBox(height: 8),
               const CupertinoActivityIndicator(),
 
-              // <--- PERUBAHAN: Tombol untuk memunculkan dialog
+              // <--- PERUBAHAN: TextField dari Langkah 5 ditambahkan di sini
+              const SizedBox(height: 24),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 32.0),
+                child: TextField(
+                  obscureText: false,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Nama',
+                  ),
+                ),
+              ),
+              // ---> AKHIR PERUBAHAN
+
               const SizedBox(height: 24),
               ElevatedButton(
                 child: const Text('Show alert'),
@@ -99,9 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-// <--- PERUBAHAN: Fungsi untuk menampilkan dialog dari Langkah 4
 showAlertDialog(BuildContext context) {
-  // set up the button
   Widget okButton = TextButton(
     child: const Text("OK"),
     onPressed: () {
@@ -109,7 +120,6 @@ showAlertDialog(BuildContext context) {
     },
   );
 
-  // set up the AlertDialog
   AlertDialog alert = AlertDialog(
     title: const Text("My title"),
     content: const Text("This is my message."),
@@ -118,7 +128,6 @@ showAlertDialog(BuildContext context) {
     ],
   );
 
-  // show the dialog
   showDialog(
     context: context,
     builder: (BuildContext context) {
