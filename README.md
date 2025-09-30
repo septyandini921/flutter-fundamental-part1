@@ -5,6 +5,8 @@
 
 # Hasil Akhir Praktikum 4: Menerapkan Widget Dasar
 <img width="1920" height="1080" alt="Screenshot (2140)" src="https://github.com/user-attachments/assets/4d298722-c13c-4d8d-afc9-77df7111c88c" />
+![WhatsApp Image 2025-09-30 at 12 59 49_2b1af11e](https://github.com/user-attachments/assets/32dc7d28-d4b6-41e7-b0c7-798441abfa76)
+
 ![WhatsApp Image 2025-09-30 at 12 59 49_090246ce](https://github.com/user-attachments/assets/e95dda9b-88a0-4a27-b186-24b126f0ad34)
 
 # Hasil Akhir Praktikum 5: Menerapkan Widget Material Design dan iOS Cupertino
