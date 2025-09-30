@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart'; // <--- PERUBAHAN 1: Ditambahkan
+import 'package:flutter/cupertino.dart';
 import 'basic_widget/image_widget.dart';
 
 void main() {
@@ -14,11 +14,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // <--- PERUBAHAN 2: Disesuaikan dengan instruksi
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
         useMaterial3: true,
       ),
-      // <--- PERUBAHAN 3: Judul diubah sesuai instruksi
       home: const MyHomePage(title: 'My Increment App'),
     );
   }
@@ -49,39 +47,43 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            // Widget gambar dari struktur kode Anda tetap ada
-            const MyImageWidget(),
-            const SizedBox(height: 16),
+        child: SingleChildScrollView( // Ditambahkan agar bisa di-scroll jika konten terlalu panjang
+          padding: const EdgeInsets.symmetric(vertical: 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const MyImageWidget(),
+              const SizedBox(height: 16),
+              const Text(
+                'You have pushed the button this many times:',
+              ),
+              Text(
+                '$_counter',
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+              const SizedBox(height: 24),
+              const Text('Contoh Widget Cupertino:'),
+              const SizedBox(height: 8),
+              CupertinoButton(
+                color: Colors.blue,
+                child: const Text("Contoh button"),
+                onPressed: () {},
+              ),
+              const SizedBox(height: 8),
+              const CupertinoActivityIndicator(),
 
-            // Teks dari instruksi Langkah 3
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            // Counter dari struktur kode Anda tetap ada
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-
-            const SizedBox(height: 24),
-
-            // Widget dari Langkah 1 (Cupertino) ditambahkan di sini
-            const Text('Contoh Widget Cupertino:'),
-            const SizedBox(height: 8),
-            CupertinoButton(
-              color: Colors.blue,
-              child: const Text("Contoh button"),
-              onPressed: () {},
-            ),
-            const SizedBox(height: 8),
-            const CupertinoActivityIndicator(),
-          ],
+              // <--- PERUBAHAN: Tombol untuk memunculkan dialog
+              const SizedBox(height: 24),
+              ElevatedButton(
+                child: const Text('Show alert'),
+                onPressed: () {
+                  showAlertDialog(context);
+                },
+              ),
+            ],
+          ),
         ),
       ),
-      // <--- PERUBAHAN 5: Menambahkan BottomAppBar
       bottomNavigationBar: BottomAppBar(
         child: Container(
           height: 50.0,
@@ -92,8 +94,35 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'Increment Counter',
         child: const Icon(Icons.add),
       ),
-      // <--- PERUBAHAN 6: Menambahkan lokasi FAB
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
+}
+
+// <--- PERUBAHAN: Fungsi untuk menampilkan dialog dari Langkah 4
+showAlertDialog(BuildContext context) {
+  // set up the button
+  Widget okButton = TextButton(
+    child: const Text("OK"),
+    onPressed: () {
+      Navigator.pop(context);
+    },
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: const Text("My title"),
+    content: const Text("This is my message."),
+    actions: [
+      okButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }
